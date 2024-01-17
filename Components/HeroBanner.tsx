@@ -29,7 +29,9 @@ export const HeroBanner = () => {
 
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      // switch network to sepolia
+      await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0xaa36a7" }] } as any);
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts",  });
       const account = accounts[0];
       const web3 = new Web3(window.ethereum);
       const FaucetInst = new web3.eth.Contract(Faucet, "0x2c443a31076639Fd651C779b32523fC6d1D46bE5");
