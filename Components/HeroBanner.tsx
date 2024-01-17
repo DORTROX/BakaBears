@@ -70,7 +70,8 @@ export const HeroBanner = () => {
           </div>
         </CardBody>
       </Card>
-      <div className='block grid-cols-3 gap-4 md:grid'>
+
+      <div className='flex gap-4 md:space-x-4 p-10'>
         <div>
           <Card className='m-auto max-w-[400px] my-2 md:mx-0'>
             <CardHeader className='flex gap-3'>
@@ -93,7 +94,7 @@ export const HeroBanner = () => {
             </CardHeader>
             <Divider />
             <CardBody>
-              <p>To check if the user has nft on the address</p>
+              <p>To check if the user has an NFT on the address</p>
             </CardBody>
             <Divider />
             <CardFooter className='gap-4'>
@@ -116,13 +117,14 @@ export const HeroBanner = () => {
             </CardFooter>
           </Card>
         </div>
-        <Image src='/hanifaucetsoda.png' />
+        <Image src='/hanifaucetsoda.png' width={640}/>
         <div className='flex flex-col justify-center items-center h-full'>
           <Button color='warning' onClick={() => claim()}>
             Claim Fresh faucet
           </Button>
         </div>
       </div>
+
     </div>
   );
 };
