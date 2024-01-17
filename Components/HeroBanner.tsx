@@ -4,12 +4,39 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/Redux/UserState";
 import { Button, Card, CardHeader, CardBody, CardFooter, Divider, Input, Image, Chip } from "@nextui-org/react";
+import ReactPlayer from 'react-player'
+import Faucet from "@/Contract/Faucet.json";
+import Web3 from "web3";
+import { useDispatch } from "react-redux";
+import { setUserLoginDetails } from "@/Redux/UserState";
+
+declare global {
+  interface Window {
+    ethereum: {
+      request: (request: { method: string }) => Promise<string[]>;
+    };
+  }
+}
 
 export const HeroBanner = () => {
+  const dispatch = useDispatch();
   const [show, setshow] = useState();
   const [EligibilityvalueInput, setEligibilityvalueInput] = useState("0xe9502CaA664875d8dFA0a3F74C48bf01dB78A0d2");
   const user = useSelector(selectUser);
   const [timeLeft, settimeLeft] = useState(0);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const account = accounts[0];
+      const web3 = new Web3(window.ethereum);
+      const FaucetInst = new web3.eth.Contract(Faucet, "0x2c443a31076639Fd651C779b32523fC6d1D46bE5");
+      dispatch(setUserLoginDetails({ address: account, faucetInstance: FaucetInst }));
+    }
+  };
+
   const claim = async () => {
     if (user.address.length > 0) {
       try {
@@ -59,9 +86,39 @@ export const HeroBanner = () => {
     fetchTimeLeft();
   }, [user.address]);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div className='m-4'>
-      <Card>
+      <div className="navbar">
+        <p>{<Image src={`/battery/battery ${roundToNearestTen(100 - timeLeft)}.png`} width={100} height={100} className='border-r-0' />} {100 - timeLeft}%</p>
+        <button className="navButton" onClick={() => connectWallet()}>connect</button>
+      </div>
+      <div className="mainBody">
+        <div className="sodaCan">
+          <ReactPlayer
+            url="/hanidrip2.mp4"
+            height={400}
+            playing
+            loop
+            muted
+            className="gif"
+          />
+          <div className="sodaImage">
+            <Image src='/hanifaucetsoda.png' width={350} />
+          </div>
+        </div>
+        <div className="rightText">
+          <button className="mainBodyButton">Claim fresh faucet</button>
+        </div>
+      </div>
+      {/* <Card>
         <CardBody>
           <div className='flex gap-4 justify-center'>
             <h2>Claim Next Faucet</h2>
@@ -123,7 +180,7 @@ export const HeroBanner = () => {
             Claim Fresh faucet
           </Button>
         </div>
-      </div>
+      </div> */}
 
     </div>
   );

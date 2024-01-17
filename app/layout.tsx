@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-
 //Providers
 import NextUiProvider from "@/Providers/NextUiProvider";
 
@@ -24,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <NextUiProvider>
           <WarningBanner/>
-          <CNavbar/>
+          {/* <CNavbar/> */}
           {children}
           </NextUiProvider>
       </body>

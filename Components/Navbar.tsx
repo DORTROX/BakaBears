@@ -42,13 +42,9 @@ export default function CNavabar() {
     }
   };
 
-  useEffect(() => {
-    
-  });
-
   return (
     <Navbar isBordered onMenuOpenChange={setIsMenuOpen} shouldHideOnScroll>
-      <NavbarContent justify='start'>
+      {/* <NavbarContent justify='start'>
         <NavbarBrand>
           <Image className='bg-black p-2' src={"https://i.seadn.io/s/raw/files/07f2bad57a292a1202c5324a7374fcd4.png?auto=format&dpr=1&w=256"} alt='Atrox Logo' width={50} height={50} />
           <p className='hidden sm:block font-bold text-inherit'>$HANZ</p>
@@ -114,7 +110,7 @@ export default function CNavabar() {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
-      <NavbarMenu></NavbarMenu>
+      <NavbarMenu></NavbarMenu> */}
     </Navbar>
   );
 }
