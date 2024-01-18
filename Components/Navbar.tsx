@@ -37,7 +37,7 @@ export default function CNavabar() {
       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       const account = accounts[0];
       const web3 = new Web3(window.ethereum);
-      const FaucetInst = new web3.eth.Contract(Faucet, "0x2c443a31076639Fd651C779b32523fC6d1D46bE5");
+      const FaucetInst = new web3.eth.Contract(Faucet, "0xB1Ed41d13c28394ED3769695745167639A9E6aa7");
       dispatch(setUserLoginDetails({ address: account, faucetInstance: FaucetInst  }));
     }
   };

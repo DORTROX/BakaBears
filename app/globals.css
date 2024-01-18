@@ -38,44 +38,46 @@ body {
 
 .mainBody {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .mainBody {
+    display: block;
+  }
 }
 
 button {
+  color: #685f92;
   background-color: #b29965;
-  border: solid 1px #232829;
+  padding: 1% 2%;
+  font-weight: bolder;
+  /* border: solid 1px #232829;
   border-radius: 20px;
   padding-right: 10px;
-  padding-left: 10px;
-  color: #685f92;
+  padding-left: 10px; */
+  transition: 0.2s all;
 }
 
 .navButton {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 30px;
-  height: 80px;
-  width: 160px;
-  box-shadow: #685f92 0px 0px 40px 0px;
+  font-size: 20px;
+  border: 5px solid #685f92 ;
+  border-radius: 20px;
 }
 
 .navButton:hover, .mainBodyButton:hover{
   background-color: #685f92;
   color: #b29965;
-  box-shadow: #b29965 0px 0px 40px 0px;
 }
 
 .mainBodyButton {
-  font-size: 30px;
-  height: 80px;
-  width: 300px;
+  width: auto;
+  font-size: 20px;
+  border: 5px solid #685f92 ;
+  border-radius: 20px;
   box-shadow: #685f92 0px 0px 40px 0px;
-}
-
-.rightText {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 p {
@@ -84,11 +86,9 @@ p {
 }
 
 .sodaCan {
-  padding: 0px;
-  margin: 0px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -97,5 +97,6 @@ p {
 }
 
 .sodaImage {
-  margin-top: -80px; /* Adjust as needed to eliminate the gap */
+  margin-top: -190px;
+  margin-left: -42px; /* Adjust as needed to eliminate the gap */
 }

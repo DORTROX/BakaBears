@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/Redux/UserState";
 import { Button, Card, CardHeader, CardBody, CardFooter, Divider, Input, Image, Chip } from "@nextui-org/react";
-import ReactPlayer from 'react-player'
+import ReactPlayer from "react-player";
 import Faucet from "@/Contract/Faucet.json";
 import Web3 from "web3";
 import { useDispatch } from "react-redux";
@@ -31,7 +31,7 @@ export const HeroBanner = () => {
     if (typeof window.ethereum !== "undefined") {
       // switch network to sepolia
       await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0xaa36a7" }] } as any);
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts",  });
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       const account = accounts[0];
       const web3 = new Web3(window.ethereum);
       const FaucetInst = new web3.eth.Contract(Faucet, "0x2c443a31076639Fd651C779b32523fC6d1D46bE5");
@@ -42,8 +42,8 @@ export const HeroBanner = () => {
   const claim = async () => {
     if (user.address.length > 0) {
       try {
-        const transaction = await user.faucetInstance.methods.claim().send({ from: user.address });
-        console.log('Claim transaction hash:', transaction.transactionHash);
+        const transaction = await user.faucetInstance.methods.claim().send({ from: user.address, gas: 3000000 });
+        window.location.reload();
       } catch (error) {
         console.error("An error occurred while claiming:", error);
       }
@@ -98,26 +98,26 @@ export const HeroBanner = () => {
 
   return (
     <div className='m-4'>
-      <div className="navbar">
-        <p>{<Image src={`/battery/battery ${roundToNearestTen(100 - timeLeft)}.png`} width={100} height={100} className='border-r-0' />} {100 - timeLeft}%</p>
-        <button className="navButton" onClick={() => connectWallet()}>connect</button>
+      <div className='navbar'>
+        <p>
+          {<Image src={`/battery/battery ${roundToNearestTen(100 - timeLeft)}.png`} width={50} height={50} className='border-r-0' />}{" "}
+          {100 - timeLeft}%
+        </p>
+        <button className='navButton' onClick={() => connectWallet()}>
+          connect
+        </button>
       </div>
-      <div className="mainBody">
-        <div className="sodaCan">
-          <ReactPlayer
-            url="/hanidrip2.mp4"
-            height={400}
-            playing
-            loop
-            muted
-            className="gif"
-          />
-          <div className="sodaImage">
+      <div className='mainBody'>
+        <div className='sodaCan'>
+          <ReactPlayer width={'auto'} url='/hanidrip2.mp4' playing loop muted/>
+          <div className='sodaImage'>
             <Image src='/hanifaucetsoda.png' width={350} />
           </div>
         </div>
-        <div className="rightText">
-          <button className="mainBodyButton">Claim fresh faucet</button>
+        <div>
+          <button className='mainBodyButton' onClick={() => claim()}>
+            Claim fresh faucet
+          </button>
         </div>
       </div>
       {/* <Card>
@@ -183,7 +183,6 @@ export const HeroBanner = () => {
           </Button>
         </div>
       </div> */}
-
     </div>
   );
 };

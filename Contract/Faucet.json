@@ -63,7 +63,7 @@
   {
     "inputs": [{ "internalType": "address", "name": "_address", "type": "address" }],
     "name": "hasEligibleNFT",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
